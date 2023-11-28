@@ -1,4 +1,4 @@
-package gsc.projects.orderservice.model;
+package gsc.projects.orderservice.model.product;
 
 public enum ProductType {
 

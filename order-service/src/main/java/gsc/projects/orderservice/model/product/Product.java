@@ -1,7 +1,8 @@
-package gsc.projects.orderservice.model;
+package gsc.projects.orderservice.model.product;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import gsc.projects.orderservice.model.order.Order;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
