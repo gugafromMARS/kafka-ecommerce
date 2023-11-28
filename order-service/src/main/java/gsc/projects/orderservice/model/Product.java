@@ -21,6 +21,7 @@ public class Product {
     private String name;
 
     @Column(name = "product_type")
+    @Enumerated(value = EnumType.STRING)
     private ProductType productType;
 
     private double price;
