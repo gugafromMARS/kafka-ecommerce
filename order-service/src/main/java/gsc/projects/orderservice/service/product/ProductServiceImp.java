@@ -43,8 +43,9 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void deleteById(Long productId) {
-        productRepository.findById(productId)
+        Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        productRepository.delete(product);
     }
 
 
