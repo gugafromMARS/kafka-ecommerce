@@ -43,7 +43,7 @@ public class Product {
         }
 
         public ProductBuilder withName(String name){
-            product.setName(name);
+            product.setName(name.toUpperCase());
             return this;
         }
 
