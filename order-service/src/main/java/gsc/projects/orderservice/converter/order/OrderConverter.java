@@ -7,12 +7,17 @@ import gsc.projects.orderservice.dto.order.OrderDto;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.model.product.Product;
 import gsc.projects.orderservice.model.product.ProductOrder;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@AllArgsConstructor
 public class OrderConverter {
 
-    private ProductConverter productConverter;
+    private final ProductConverter productConverter;
+
 
     public OrderDto toDto(Order order){
         return OrderDto.builder()
@@ -32,8 +37,10 @@ public class OrderConverter {
                         .toList())
                 .build();
         for(Product p : order.getProducts()){
+            List<Order> orderList = p.getOrders();
+            orderList.add(order);
             for(ProductOrder pO : orderCreateDto.getProductOrders()){
-                if(p.getName().equals(pO.getName())){
+                if(p.getName().equals(pO.getName().toUpperCase())){
                     orderPrice += p.getPrice() * pO.getQuantity();
                     break;
                 }
