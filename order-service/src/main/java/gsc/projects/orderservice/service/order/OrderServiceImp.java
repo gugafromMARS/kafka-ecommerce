@@ -13,24 +13,27 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @AllArgsConstructor
-public class OrderServiceImp {
+public class OrderServiceImp implements OrderService {
 
 
     private final OrderRepository orderRepository;
     private final OrderConverter orderConverter;
 
+    @Override
     public OrderDto createOrder(OrderCreateDto orderCreateDto) {
         Order newOrder = orderConverter.fromCreateDto(orderCreateDto);
         orderRepository.save(newOrder);
         return orderConverter.toDto(newOrder);
     }
 
+    @Override
     public OrderDto getById(Long orderId) {
         Order existingOrder =  orderRepository.findById(orderId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
         return orderConverter.toDto(existingOrder);
     }
 
+    @Override
     public void deleteById(Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));

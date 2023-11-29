@@ -2,9 +2,8 @@ package gsc.projects.orderservice.controller.order;
 
 
 import gsc.projects.orderservice.dto.order.OrderCreateDto;
-import gsc.projects.orderservice.service.order.OrderServiceImp;
+import gsc.projects.orderservice.service.order.OrderService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +13,21 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class OrderController {
 
-    private final OrderServiceImp orderServiceImp;
+    private final OrderService orderService;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody OrderCreateDto orderCreateDto){
-        return new ResponseEntity<>(orderServiceImp.createOrder(orderCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.createOrder(orderCreateDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{orderId}")
     public ResponseEntity<?> get(@PathVariable ("orderId") Long orderId){
-        return ResponseEntity.ok(orderServiceImp.getById(orderId));
+        return ResponseEntity.ok(orderService.getById(orderId));
     }
 
     @DeleteMapping("/{orderId}")
     public ResponseEntity<?> delete(@PathVariable ("orderId") Long orderId){
-        orderServiceImp.deleteById(orderId);
+        orderService.deleteById(orderId);
         return ResponseEntity.ok("Order deleted successfully");
     }
 }
