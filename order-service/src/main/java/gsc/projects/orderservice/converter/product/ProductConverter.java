@@ -1,6 +1,7 @@
 package gsc.projects.orderservice.converter.product;
 
 
+import gsc.projects.basedomains.events.ProductEvent;
 import gsc.projects.orderservice.dto.product.ProductCreateDto;
 import gsc.projects.orderservice.dto.product.ProductDto;
 import gsc.projects.orderservice.model.product.Product;
@@ -32,6 +33,14 @@ public class ProductConverter {
                 .withName(productCreateDto.getName())
                 .withProductType(productCreateDto.getProductType())
                 .withPrice(productCreateDto.getPrice())
+                .withQuantity(productCreateDto.getQuantity())
+                .build();
+    }
+
+    public ProductEvent fromProduct(Product product){
+        return ProductEvent.builder()
+                .name(product.getName())
+                .quantity(product.getQuantity())
                 .build();
     }
 }

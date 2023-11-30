@@ -27,6 +27,8 @@ public class Product {
 
     private double price;
 
+    private int quantity;
+
     @ManyToMany
     @JsonIgnore
     private List<Order> orders;
@@ -57,6 +59,10 @@ public class Product {
             return this;
         }
 
+        public ProductBuilder withQuantity(int quantity){
+            product.setQuantity(quantity);
+            return this;
+        }
         public Product build(){
             return product;
         }
