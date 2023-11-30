@@ -1,18 +1,17 @@
 package gsc.projects.basedomains.events;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductEvent {
 
     private String name;
 
-    // tenho de meter quantity no product e nao esquecer de fazer um metodo para o converter ...
     private int quantity;
 
     @Override

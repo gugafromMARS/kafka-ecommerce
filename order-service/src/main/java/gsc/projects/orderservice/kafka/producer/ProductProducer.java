@@ -26,7 +26,7 @@ public class ProductProducer {
 
         Message<ProductEvent> message = MessageBuilder
                 .withPayload(productEvent)
-                .setHeader(KafkaHeaders.TOPIC, "topic_productz")
+                .setHeader(KafkaHeaders.TOPIC, "topic_productzzz")
                 .build();
 
         kafkaTemplate.send(message);
