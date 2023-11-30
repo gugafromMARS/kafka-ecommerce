@@ -4,6 +4,7 @@ package gsc.projects.orderservice.service.order;
 import gsc.projects.orderservice.converter.order.OrderConverter;
 import gsc.projects.orderservice.dto.order.OrderCreateDto;
 import gsc.projects.orderservice.dto.order.OrderDto;
+import gsc.projects.orderservice.kafka.producer.OrderProducer;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.repository.order.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -18,11 +19,13 @@ public class OrderServiceImp implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderConverter orderConverter;
+    private final OrderProducer orderProducer;
 
     @Override
     public OrderDto createOrder(OrderCreateDto orderCreateDto) {
         Order newOrder = orderConverter.fromCreateDto(orderCreateDto);
         orderRepository.save(newOrder);
+        orderProducer.sendOrderEvent(orderConverter.fromOrder(newOrder));
         return orderConverter.toDto(newOrder);
     }
 

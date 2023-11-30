@@ -7,6 +7,7 @@ import gsc.projects.orderservice.dto.order.OrderDto;
 import gsc.projects.orderservice.dto.product.ProductCreateDto;
 import gsc.projects.orderservice.dto.product.ProductDto;
 import gsc.projects.orderservice.dto.product.ProductUpdateDto;
+import gsc.projects.orderservice.kafka.producer.ProductProducer;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.model.product.Product;
 import gsc.projects.orderservice.repository.product.ProductRepository;
@@ -24,6 +25,7 @@ public class ProductServiceImp implements ProductService {
     private final ProductConverter productConverter;
     private final ProductRepository productRepository;
     private final OrderConverter orderConverter;
+    private final ProductProducer productProducer;
 
     @Override
     public ProductDto createProduct(ProductCreateDto productCreateDto) {
@@ -33,6 +35,7 @@ public class ProductServiceImp implements ProductService {
         }
         Product newProduct = productConverter.fromCreateDto(productCreateDto);
         productRepository.save(newProduct);
+        productProducer.sendProductEvent(productConverter.fromProduct(newProduct));
         return productConverter.toDto(newProduct);
     }
 
