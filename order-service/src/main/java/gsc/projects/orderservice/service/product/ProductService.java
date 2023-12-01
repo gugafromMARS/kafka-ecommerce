@@ -17,4 +17,6 @@ public interface ProductService {
     ProductDto updateById(Long productId, ProductUpdateDto productUpdateDto);
 
     List<OrderDto> getAllOrders(String productName);
+
+    List<ProductDto> getAll();
 }

@@ -26,6 +26,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getByName(productName));
     }
 
+    @GetMapping
+    public ResponseEntity<?> getProducts(){
+        return ResponseEntity.ok(productService.getAll());
+    }
+
     @GetMapping("/{productName}/orders")
     public ResponseEntity<?> getOrders(@PathVariable ("productName") String productName){
         return ResponseEntity.ok(productService.getAllOrders(productName));

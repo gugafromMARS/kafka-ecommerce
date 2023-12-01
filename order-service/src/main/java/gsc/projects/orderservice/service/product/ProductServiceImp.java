@@ -78,4 +78,11 @@ public class ProductServiceImp implements ProductService {
                 .map(order -> orderConverter.toDto(order))
                 .toList();
     }
+
+    @Override
+    public List<ProductDto> getAll() {
+        return productRepository.findAll().stream()
+                .map(product -> productConverter.toDto(product))
+                .toList();
+    }
 }
