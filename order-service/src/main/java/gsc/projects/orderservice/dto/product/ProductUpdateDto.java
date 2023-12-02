@@ -9,4 +9,6 @@ import lombok.Setter;
 public class ProductUpdateDto {
 
     private double price;
+    private int quantity;
+
 }

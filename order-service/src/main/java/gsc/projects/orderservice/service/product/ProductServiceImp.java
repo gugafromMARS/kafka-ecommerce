@@ -62,7 +62,14 @@ public class ProductServiceImp implements ProductService {
     public ProductDto updateById(Long productId, ProductUpdateDto productUpdateDto) {
         Product existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
-        existingProduct.setPrice(productUpdateDto.getPrice());
+        if(productUpdateDto.getQuantity() != 0 && productUpdateDto.getPrice() != 0){
+            existingProduct.setQuantity(productUpdateDto.getQuantity());
+            existingProduct.setPrice(productUpdateDto.getPrice());
+        } else if(productUpdateDto.getQuantity() == 0){
+            existingProduct.setPrice(productUpdateDto.getPrice());
+        } else if(productUpdateDto.getPrice() == 0) {
+            existingProduct.setQuantity(productUpdateDto.getQuantity());
+        }
         productRepository.save(existingProduct);
         return productConverter.toDto(existingProduct);
     }

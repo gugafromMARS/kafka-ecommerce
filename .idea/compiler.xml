@@ -10,6 +10,7 @@
         <module name="stock-service" />
         <module name="base-domains" />
         <module name="order-service" />
+        <module name="shipping-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base-domains" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="shipping-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
     </option>
   </component>
