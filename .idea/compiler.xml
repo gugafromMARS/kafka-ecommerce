@@ -19,7 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base-domains" options="-parameters" />
       <module name="order-service" options="-parameters" />
-      <module name="shipping-service" options="" />
+      <module name="shipping-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
