@@ -12,4 +12,5 @@ import java.util.List;
 public class OrderCreateDto {
 
     private List<ProductOrder> productOrders;
+    private String userEmail;
 }

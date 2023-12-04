@@ -27,6 +27,7 @@ public class OrderConverter {
                         .map(product -> productConverter.toDto(product))
                         .toList())
                 .totalPrice(order.getTotalPrice())
+                .userEmail(order.getUserEmail())
                 .build();
     }
 
@@ -36,6 +37,7 @@ public class OrderConverter {
                 .withProducts(orderCreateDto.getProductOrders().stream()
                         .map(productOrder -> productConverter.fromProductOrder(productOrder))
                         .toList())
+                .withUserEmail(orderCreateDto.getUserEmail())
                 .build();
         for(Product p : order.getProducts()){
             List<Order> orderList = p.getOrders();

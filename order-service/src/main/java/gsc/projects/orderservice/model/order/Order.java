@@ -31,6 +31,8 @@ public class Order {
     @Column(name = "total_price")
     private double totalPrice;
 
+    private String userEmail;
+
     public static OrderBuilder builder(){
         return new OrderBuilder();
     }
@@ -48,6 +50,11 @@ public class Order {
 
         public OrderBuilder withPrice(double price){
             order.setTotalPrice(price);
+            return this;
+        }
+
+        public OrderBuilder withUserEmail(String userEmail){
+            order.setUserEmail(userEmail);
             return this;
         }
 

@@ -16,5 +16,6 @@ public class OrderDto {
     private Long id;
     private List<ProductDto> products;
     private double totalPrice;
+    private String userEmail;
 
 }
