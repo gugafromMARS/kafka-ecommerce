@@ -1,10 +1,39 @@
 package gsc.projects.userservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import gsc.projects.userservice.dto.UserCreatedDto;
+import gsc.projects.userservice.dto.UserUpdateDto;
+import gsc.projects.userservice.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/user")
+@AllArgsConstructor
 public class UserController {
+
+
+    private UserService userService;
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody UserCreatedDto userCreatedDto){
+        return new ResponseEntity<>(userService.createUser(userCreatedDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> get(@PathVariable ("userId") Long userId){
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> delete(@PathVariable ("userId") Long userId){
+        userService.deleteById(userId);
+        return ResponseEntity.ok("User deleted successfully");
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> update(@PathVariable ("userId") Long userId, UserUpdateDto userUpdateDto){
+        return ResponseEntity.ok(userService.updateById(userId,  userUpdateDto));
+    }
 }
