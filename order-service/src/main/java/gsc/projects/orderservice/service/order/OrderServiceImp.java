@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class OrderServiceImp implements OrderService {
@@ -41,6 +43,13 @@ public class OrderServiceImp implements OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
         orderRepository.delete(order);
+    }
+
+    @Override
+    public List<OrderDto> getOrderByUserEmail(String userEmail) {
+        return orderRepository.findByUserEmail(userEmail).stream()
+                .map(order -> orderConverter.toDto(order))
+                .toList();
     }
 
 }

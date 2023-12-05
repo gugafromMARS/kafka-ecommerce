@@ -28,6 +28,7 @@ public class ProductConverter {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .build();
     }
     public Product fromCreateDto(ProductCreateDto productCreateDto){
