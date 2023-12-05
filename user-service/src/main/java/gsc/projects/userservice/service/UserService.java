@@ -7,7 +7,7 @@ import gsc.projects.userservice.dto.UserUpdateDto;
 public interface UserService {
     UserDto createUser(UserCreatedDto userCreatedDto);
 
-    UserDto getUserById(Long userId);
+    UserDto getUserByEmail(String userEmail);
 
     void deleteById(Long userId);
 

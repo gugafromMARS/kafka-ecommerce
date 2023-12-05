@@ -22,4 +22,11 @@ public class KafkaTopicConfig {
                 .name("topic_productzzz")
                 .build();
     }
+
+    @Bean
+    public NewTopic shippingTopic(){
+        return TopicBuilder
+                .name("topic_shipping")
+                .build();
+    }
 }

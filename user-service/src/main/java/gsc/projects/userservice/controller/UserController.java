@@ -21,9 +21,9 @@ public class UserController {
         return new ResponseEntity<>(userService.createUser(userCreatedDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> get(@PathVariable ("userId") Long userId){
-        return ResponseEntity.ok(userService.getUserById(userId));
+    @GetMapping("/{userEmail}")
+    public ResponseEntity<?> get(@PathVariable ("userEmail") String userEmail){
+        return ResponseEntity.ok(userService.getUserByEmail(userEmail));
     }
 
     @DeleteMapping("/{userId}")
