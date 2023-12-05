@@ -1,10 +1,12 @@
 package gsc.projects.orderservice.service.order;
 
 
+import gsc.projects.basedomains.events.ShippingOrder;
 import gsc.projects.orderservice.converter.order.OrderConverter;
 import gsc.projects.orderservice.dto.order.OrderCreateDto;
 import gsc.projects.orderservice.dto.order.OrderDto;
 import gsc.projects.orderservice.kafka.producer.OrderProducer;
+import gsc.projects.orderservice.kafka.producer.ShippingProducer;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.repository.order.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -22,15 +24,21 @@ public class OrderServiceImp implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderConverter orderConverter;
     private final OrderProducer orderProducer;
+    private final ShippingProducer shippingProducer;
 
     @Override
     public OrderDto createOrder(OrderCreateDto orderCreateDto) {
         Order newOrder = orderConverter.fromCreateDto(orderCreateDto);
         orderRepository.save(newOrder);
         orderProducer.sendOrderEvent(orderConverter.fromOrder(newOrder));
+        sendShippingOrder(newOrder);
         return orderConverter.toDto(newOrder);
     }
 
+    public void sendShippingOrder(Order order){
+        ShippingOrder shippingOrder = orderConverter.fromOrderToShipping(order);
+        shippingProducer.sendShippingOrder(shippingOrder);
+    }
     @Override
     public OrderDto getById(Long orderId) {
         Order existingOrder =  orderRepository.findById(orderId)

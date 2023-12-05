@@ -16,4 +16,14 @@ public class ShippingOrder {
     private String userAddress;
     List<ShippingProduct> shippingProducts;
     private double totalPrice;
+
+    @Override
+    public String toString() {
+        return "ShippingOrder{" +
+                "userName='" + userName + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", shippingProducts=" + shippingProducts +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
