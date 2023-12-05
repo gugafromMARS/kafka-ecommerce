@@ -2,16 +2,11 @@ package gsc.projects.orderservice.model.order;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import gsc.projects.orderservice.converter.product.ProductConverter;
 import gsc.projects.orderservice.model.product.Product;
-import gsc.projects.orderservice.model.product.ProductOrder;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
