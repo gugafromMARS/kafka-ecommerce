@@ -12,14 +12,14 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic orderTopic(){
         return TopicBuilder
-                .name("topic_orderzzz")
+                .name("orders_topicz")
                 .build();
     }
 
     @Bean
     public NewTopic productTopic(){
         return TopicBuilder
-                .name("topic_productzzz")
+                .name("products_topicz")
                 .build();
     }
 
