@@ -1,7 +1,7 @@
 package gsc.projects.orderservice.service.order;
 
 
-import gsc.projects.orderservice.dto.order.user.UserDto;
+import gsc.projects.basedomains.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
