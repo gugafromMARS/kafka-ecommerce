@@ -17,7 +17,7 @@ public class OrderConsumer {
     private final StockServiceImp stockServiceImp;
 
 
-    @KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "topic_orderzzz")
+    @KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "orders_topicz")
     public void consume(OrderEvent orderEvent){
         LOGGER.info(String.format("Order event received at stock service -> %s", orderEvent.toString()));
         stockServiceImp.updateProductQuantity(orderEvent);
