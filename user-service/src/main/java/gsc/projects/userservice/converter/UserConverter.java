@@ -1,8 +1,8 @@
 package gsc.projects.userservice.converter;
 
 
+import gsc.projects.basedomains.dto.UserDto;
 import gsc.projects.userservice.dto.UserCreatedDto;
-import gsc.projects.userservice.dto.UserDto;
 import gsc.projects.userservice.model.User;
 import org.springframework.stereotype.Component;
 

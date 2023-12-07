@@ -1,8 +1,8 @@
 package gsc.projects.userservice.service;
 
+import gsc.projects.basedomains.dto.UserDto;
 import gsc.projects.userservice.converter.UserConverter;
 import gsc.projects.userservice.dto.UserCreatedDto;
-import gsc.projects.userservice.dto.UserDto;
 import gsc.projects.userservice.dto.UserUpdateDto;
 import gsc.projects.userservice.model.User;
 import gsc.projects.userservice.repository.UserRepository;

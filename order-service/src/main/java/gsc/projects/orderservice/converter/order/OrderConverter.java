@@ -1,13 +1,13 @@
 package gsc.projects.orderservice.converter.order;
 
 
+import gsc.projects.basedomains.dto.UserDto;
 import gsc.projects.basedomains.events.OrderEvent;
 import gsc.projects.basedomains.events.ShippingOrder;
 import gsc.projects.basedomains.events.ShippingProduct;
 import gsc.projects.orderservice.converter.product.ProductConverter;
 import gsc.projects.orderservice.dto.order.OrderCreateDto;
 import gsc.projects.orderservice.dto.order.OrderDto;
-import gsc.projects.orderservice.dto.order.user.UserDto;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.model.product.Product;
 import gsc.projects.orderservice.model.product.ProductOrder;

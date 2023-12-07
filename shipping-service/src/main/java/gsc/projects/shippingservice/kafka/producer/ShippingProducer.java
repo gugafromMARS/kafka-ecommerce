@@ -1,4 +1,4 @@
-package gsc.projects.orderservice.kafka.producer;
+package gsc.projects.shippingservice.kafka.producer;
 
 
 import gsc.projects.basedomains.events.ShippingOrder;
@@ -14,19 +14,19 @@ import org.springframework.stereotype.Service;
 public class ShippingProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ShippingProducer.class);
+
     private KafkaTemplate<String, ShippingOrder> kafkaTemplate;
 
     public ShippingProducer(KafkaTemplate<String, ShippingOrder> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-
-    public void sendShippingOrder(ShippingOrder shippingOrder){
-        LOGGER.info(String.format("Shipping order sent to shipping service -> %s", shippingOrder.toString()));
+    public void send(ShippingOrder shippingOrder){
+        LOGGER.info(String.format("Shipping order to user service -> %s", shippingOrder.toString()));
 
         Message<ShippingOrder> message = MessageBuilder
                 .withPayload(shippingOrder)
-                .setHeader(KafkaHeaders.TOPIC, "topic_shipping")
+                .setHeader(KafkaHeaders.TOPIC, "shipping_order")
                 .build();
 
         kafkaTemplate.send(message);
