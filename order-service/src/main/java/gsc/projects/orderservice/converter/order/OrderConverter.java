@@ -10,7 +10,6 @@ import gsc.projects.orderservice.dto.order.OrderCreateDto;
 import gsc.projects.orderservice.dto.order.OrderDto;
 import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.model.product.Product;
-import gsc.projects.orderservice.model.product.ProductOrder;
 import gsc.projects.orderservice.service.order.APIUser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -55,25 +54,26 @@ public class OrderConverter {
 
     public Order fromCreateDto(OrderCreateDto orderCreateDto){
         double orderPrice = 0;
-        Order order = Order.builder()
+        int index = 0;
+        List<Integer> quantites = new ArrayList<>();
+        Order order = new Order().builder()
                 .withProducts(orderCreateDto.getProductOrders().stream()
-                        .map(productOrder -> productConverter.fromProductOrder(productOrder))
+                        .map(productOrder -> {
+                            quantites.add(productOrder.getQuantity());
+                            return productConverter.fromProductOrder(productOrder);
+                        })
                         .toList())
                 .withUserEmail(orderCreateDto.getUserEmail())
                 .build();
         for(Product p : order.getProducts()){
-            List<Order> orderList = p.getOrders();
-            orderList.add(order);
-            for(ProductOrder pO : orderCreateDto.getProductOrders()){
-                if(p.getName().equals(pO.getName().toUpperCase())){
-                    orderPrice += p.getPrice() * pO.getQuantity();
-                    break;
-                }
-            }
+            orderPrice += p.getPrice() * quantites.get(index);
+            index++;
         }
         order.setTotalPrice(orderPrice);
         return order;
     }
+
+
 
     public OrderEvent fromOrder(Order order){
         return OrderEvent.builder()
