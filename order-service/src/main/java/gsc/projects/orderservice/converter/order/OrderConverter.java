@@ -54,20 +54,14 @@ public class OrderConverter {
 
     public Order fromCreateDto(OrderCreateDto orderCreateDto){
         double orderPrice = 0;
-        int index = 0;
-        List<Integer> quantites = new ArrayList<>();
         Order order = new Order().builder()
                 .withProducts(orderCreateDto.getProductOrders().stream()
-                        .map(productOrder -> {
-                            quantites.add(productOrder.getQuantity());
-                            return productConverter.fromProductOrder(productOrder);
-                        })
+                        .map(productOrder -> productConverter.fromProductOrder(productOrder))
                         .toList())
                 .withUserEmail(orderCreateDto.getUserEmail())
                 .build();
         for(Product p : order.getProducts()){
-            orderPrice += p.getPrice() * quantites.get(index);
-            index++;
+            orderPrice += p.getPrice() * p.getQuantity();
         }
         order.setTotalPrice(orderPrice);
         return order;
