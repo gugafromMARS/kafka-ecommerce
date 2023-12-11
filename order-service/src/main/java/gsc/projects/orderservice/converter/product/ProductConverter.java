@@ -29,7 +29,8 @@ public class ProductConverter {
 
     public Product fromProductOrder(ProductOrder productOrder){
         Product product = productRepository.findByName(productOrder.getName());
-        product.setQuantity(productOrder.getQuantity());
+        product.setQuantity(product.getQuantity() - productOrder.getQuantity());
+        productRepository.save(product);
         return product;
     }
     public ProductDto toDto(Product product){
