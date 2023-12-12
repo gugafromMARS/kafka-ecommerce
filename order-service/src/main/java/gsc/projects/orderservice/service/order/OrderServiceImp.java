@@ -3,6 +3,7 @@ package gsc.projects.orderservice.service.order;
 
 import gsc.projects.basedomains.events.ShippingOrder;
 import gsc.projects.orderservice.converter.order.OrderConverter;
+import gsc.projects.orderservice.converter.product.ProductConverter;
 import gsc.projects.orderservice.dto.order.OrderCreateDto;
 import gsc.projects.orderservice.dto.order.OrderDto;
 import gsc.projects.orderservice.kafka.producer.OrderProducer;
@@ -25,6 +26,7 @@ public class OrderServiceImp implements OrderService {
     private final OrderConverter orderConverter;
     private final OrderProducer orderProducer;
     private final ShippingProducer shippingProducer;
+    private final ProductConverter productConverter;
 
     @Override
     public OrderDto createOrder(OrderCreateDto orderCreateDto) {
@@ -32,7 +34,9 @@ public class OrderServiceImp implements OrderService {
         orderRepository.save(newOrder);
         orderProducer.sendOrderEvent(orderConverter.fromOrder(newOrder));
         sendShippingOrder(newOrder);
-        return orderConverter.toDto(newOrder);
+        OrderDto orderDto = orderConverter.toDto(newOrder);
+        productConverter.productUpdateQuantity(newOrder);
+        return orderDto;
     }
 
     public void sendShippingOrder(Order order){
