@@ -32,9 +32,17 @@ Services used.
 ```shell script
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
-3- At the same time run this command on other terminal tab for start Kafka Broker Service
+2.1- At the same time run this command on other terminal tab for start Kafka Broker Service
 ```shell script
 bin/kafka-server-start.sh config/server.properties
+```
+2.2- Open a new tab on therminal and run this command in a path you want for save your users db data
+```shell script
+docker run -d -p 3308:3306 --name users_db -v $(pwd)/usersdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=usersdb  mysql:latest
+```
+2.3- After it, run this command in a path you want for save your orders db data
+```shell script
+docker run -d -p 3307:3306 --name orders_db -v $(pwd)/ordersdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ordersdb  mysql:latest
 ```
 
 ## App functionalitys
