@@ -5,15 +5,21 @@ import gsc.projects.basedomains.events.ProductEvent;
 import gsc.projects.basedomains.events.ShippingProduct;
 import gsc.projects.orderservice.dto.product.ProductCreateDto;
 import gsc.projects.orderservice.dto.product.ProductDto;
+import gsc.projects.orderservice.model.order.Order;
 import gsc.projects.orderservice.model.product.Product;
 import gsc.projects.orderservice.model.product.ProductOrder;
 import gsc.projects.orderservice.repository.product.ProductRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ProductConverter {
 
     private  ProductRepository productRepository;
+
+    private  List<Integer> quantites = new ArrayList<>();
 
     public ProductConverter(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -29,15 +35,23 @@ public class ProductConverter {
 
     public Product fromProductOrder(ProductOrder productOrder){
         Product product = productRepository.findByName(productOrder.getName());
-        productQuantityUpdate(productOrder);
+        productSaveQuantity(productOrder);
         product.setQuantity(productOrder.getQuantity());
         return product;
     }
 
-    private void productQuantityUpdate(ProductOrder productOrder){
+    private void productSaveQuantity(ProductOrder productOrder){
         Product product = productRepository.findByName(productOrder.getName());
-        product.setQuantity(product.getQuantity() - productOrder.getQuantity());
-        productRepository.save(product);
+        quantites.add(product.getQuantity());
+    }
+
+    public void productUpdateQuantity(Order order){
+        int index = 0;
+        for(Product p : order.getProducts()){
+            p.setQuantity(quantites.get(index) - p.getQuantity());
+            productRepository.save(p);
+            index++;
+        }
     }
 
     public ProductDto toDto(Product product){
