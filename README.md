@@ -1,14 +1,13 @@
 # kafka-ecommerce
 
-![Logo](https://github.com/gugafromMARS/kafka-ecommerce/assets/116969206/6e1e353c-7bb1-4baa-b8ae-4aea21fabea6)
+![Logo](https://github.com/gugafromMARS/event-driven-kafka-spb/assets/116969206/ac5ddbc5-ee5c-47e2-b246-6b598420efd0)
 
 Welcome, this is a basic ecommerce for pratice Apache Kafka with microservices. Users make a order, then order service sent from kafka producer to Kafka broker with choosed topic for shipping service, and shipping service resend from kafka producer for the topic that user consumer receive.
 Order service, have products, and updates the quantity of all products orded from the user.
 
 ## Architecture
 
-![ArchitectureImg](https://github.com/gugafromMARS/event-driven-kafka-spb/assets/116969206/9e26993c-a223-4404-a88b-d88f9ae4b818)
-
+![ArchitectureImg](https://github.com/gugafromMARS/kafka-ecommerce/assets/116969206/6e1e353c-7bb1-4baa-b8ae-4aea21fabea6)
 
 ## Technology
 
