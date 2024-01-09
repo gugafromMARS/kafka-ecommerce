@@ -67,7 +67,12 @@ Get all orders from a product.
 
 * **Get Order from a user**
 
-* **Etc..**
+## Tests
+
+I made some integration controller tests and service unit tests only for user service, using :
+
+* Mockito
+* Junit5
 
 ## Authors
 
